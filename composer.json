@@ -1,0 +1,40 @@
+{
+  "name": "jszdavid/vanilla-cookie-consent",
+  "description": "Vanilla PHP Port of whitecube/laravel-cookie-consent",
+  "keywords": [
+    "cookie",
+    "consent",
+    "php"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/jszd2022/vanilla-cookie-consent.git",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "J. Sz. David",
+      "email": "99481700+jszd2022@users.noreply.github.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^8.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5 || ^10.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "JSzD\\VanillaCookieConsent\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "JSzD\\VanillaCookieConsent\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
