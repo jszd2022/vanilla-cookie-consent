@@ -1,22 +1,5 @@
 <?php
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | URL configuration
-    |--------------------------------------------------------------------------
-    |
-    | These values determine the package's API route URLs. Both values are
-    | nullable and represent the same concepts as Laravel's routing parameters.
-    |
-    */
-
-    'url' => [
-        'domain'     => null, // TODO
-        'middleware' => [], // TODO
-        'prefix'     => 'cookie-consent', // TODO
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Consent cookie configuration
