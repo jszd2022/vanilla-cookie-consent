@@ -1,4 +1,3 @@
-import axios from "axios";
 
 class VanillaCookieConsent {
     config;
@@ -9,26 +8,33 @@ class VanillaCookieConsent {
 
     acceptAll() {
         return this.request(this.config['accept.all'])
-            .then((response) => this.addScripts(response.data));
+            .then((data) => this.addScripts(data));
     }
 
     acceptEssentials() {
         return this.request(this.config['accept.essentials'])
-            .then((response) => this.addScripts(response.data));
+            .then((data) => this.addScripts(data));
     }
 
     configure(data) {
         return this.request(this.config['accept.configuration'], data)
-            .then((response) => this.addScripts(response.data));
+            .then((data) => this.addScripts(data));
     }
 
     reset() {
         return this.request(this.config['reset'])
-            .then((response) => this.addNotice(response.data));
+            .then((data) => this.addNotice(data));
     }
 
     request(url, data = null) {
-        return axios.post(url, data);
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: data ? JSON.stringify(data) : null,
+        }).then((response) => response.json());
     }
 
     addScripts(data) {
