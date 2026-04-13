@@ -82,6 +82,7 @@ class Response {
         } else {
             echo $this->data;
         }
+        exit;
     }
 
     private function setCookie(HttpCookie $cookie): void {
