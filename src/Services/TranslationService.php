@@ -9,7 +9,7 @@ class TranslationService {
     public function __construct() {
         $lang_dir = LCC_ROOT . '/resources/lang';
 
-        $available_locales = array_diff(scandir($lang_dir), array('.', '..'));;
+        $available_locales = array_diff(scandir($lang_dir), array('.', '..'));
 
         foreach ($available_locales as $locale) {
             $localization = require $lang_dir . '/' . $locale . '/cookies.php';

@@ -3,7 +3,7 @@
 namespace JSzD\VanillaCookieConsent\Services;
 
 class ConfigService {
-    private array $config = [];
+    private array $config;
 
     public function __construct() {
         $config_dir = LCC_ROOT . '/config';
@@ -49,5 +49,32 @@ class ConfigService {
 
     public function getConfig(): array {
         return $this->config;
+    }
+
+    public function setViewsDir(string $dir): void {
+        $this->config['views_dir'] = $dir;
+    }
+
+    public function resolveView(string $name): string {
+        [$dir, $custom] = $this->resolveViewsDir();
+        $name = $name . '.php';
+        if ($custom) {
+            if (file_exists($dir . '/' . $name)) {
+                return $dir . '/' . $name;
+            }
+            return LCC_ROOT . '/resources/views' . '/' . $name;
+        }
+        return $dir . '/' . $name;
+    }
+
+    protected function resolveViewsDir(): array {
+        $dir = $this->config['views_dir'] ?? null;
+
+        if ($dir && file_exists($dir)) {
+            return [$dir, true];
+        }
+
+        $dir = LCC_ROOT . '/resources/views';
+        return [$dir, true];
     }
 }

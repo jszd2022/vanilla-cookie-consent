@@ -2,9 +2,11 @@
 
 namespace JSzD\VanillaCookieConsent\Factories;
 
+use JSzD\VanillaCookieConsent\Services\TranslationService;
+
 /**
- * @method static \JSzD\VanillaCookieConsent\Services\TranslationService getInstance()
+ * @method static TranslationService getInstance()
  */
 class TranslationFactory extends SingletonFactory {
-    protected static $class = \JSzD\VanillaCookieConsent\Services\TranslationService::class;
+    protected static $class = TranslationService::class;
 }

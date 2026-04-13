@@ -2,6 +2,8 @@
 
 namespace JSzD\VanillaCookieConsent\Helpers;
 
+use JSzD\VanillaCookieConsent\Factories\TranslationFactory;
+
 /**
  * @method static string get(string $key, array $replace = [], string $locale = null)
  * @method static string setLocale(string $locale)
@@ -10,5 +12,5 @@ namespace JSzD\VanillaCookieConsent\Helpers;
  * @method static array getTranslations()
  */
 class Translation extends Proxy {
-    protected $factory = \JSzD\VanillaCookieConsent\Factories\TranslationFactory::class;
+    protected $factory = TranslationFactory::class;
 }
