@@ -1,10 +1,10 @@
-<?php foreach ($cookies->getCategories() as $category): ?>
+<?php foreach (($cookies ?? null)?->getCategories() as $category): ?>
     <h3><?= $category->title ?></h3>
     <table>
         <thead>
-        <th><?= lcc_trans('cookieConsent::cookies.cookie') ?></th>
-        <th><?= lcc_trans('cookieConsent::cookies.purpose') ?></th>
-        <th><?= lcc_trans('cookieConsent::cookies.duration') ?></th>
+        <th><?= lcc_trans('cookies.cookie') ?></th>
+        <th><?= lcc_trans('cookies.purpose') ?></th>
+        <th><?= lcc_trans('cookies.duration') ?></th>
         </thead>
         <tbody>
         <?php foreach ($category->getCookies() as $cookie): ?>
