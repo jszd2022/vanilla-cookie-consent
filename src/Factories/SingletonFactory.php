@@ -5,13 +5,14 @@ namespace JSzD\VanillaCookieConsent\Factories;
 
 abstract class SingletonFactory {
     protected static $class;
-    protected static $instance;
+    protected static $instances;
 
     public static function getInstance() {
-        if (static::$instance === null) {
-            static::$instance = new (static::class)();
+        if ((static::$instances[static::$class] ?? null) === null) {
+            var_dump('SingletonFactory::create:', static::$class);
+            static::$instances[static::$class] = new (static::$class)();
         }
-        return static::$instance;
+        return static::$instances[static::$class];
     }
 
 }
