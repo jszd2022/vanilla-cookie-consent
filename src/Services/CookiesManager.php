@@ -7,15 +7,13 @@ use JSzD\VanillaCookieConsent\ConsentResponse;
 use JSzD\VanillaCookieConsent\Cookie;
 use JSzD\VanillaCookieConsent\CookiesGroup;
 use JSzD\VanillaCookieConsent\Factories\CookiesRegistrarFactory;
-use JSzD\VanillaCookieConsent\Factories\SingletonFactory;
 use JSzD\VanillaCookieConsent\Helpers\Config;
-use JSzD\VanillaCookieConsent\CookiesRegistrar;
 use JSzD\VanillaCookieConsent\Helpers\Translation;
 use JSzD\VanillaCookieConsent\Http\Request;
 use JSzD\VanillaCookieConsent\Http\Cookie as HttpCookie;
 use function filemtime;
 
-class CookiesManager extends SingletonFactory {
+class CookiesManager {
 
 
     /**
