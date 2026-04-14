@@ -1,6 +1,7 @@
 <?php
 
 namespace JSzD\VanillaCookieConsent\Factories;
+
 use JSzD\VanillaCookieConsent\Services\ConfigService;
 
 /**

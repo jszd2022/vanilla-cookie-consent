@@ -57,7 +57,8 @@ class CookiesManager {
      * Create fresh cookie data for the given consented categories.
      */
     protected function makeConsentSettings(array $categories): array {
-        return array_reduce(CookiesRegistrarFactory::getInstance()->getCategories(), function ($values, $category) use ($categories) {
+        return array_reduce(CookiesRegistrarFactory::getInstance()
+            ->getCategories(), function ($values, $category) use ($categories) {
             $state = in_array($category->key(), $categories);
             return array_reduce($category->getCookies(), function ($values, $cookie) use ($state) {
                 $values[$cookie->name] = $state;
@@ -98,7 +99,8 @@ class CookiesManager {
             return false;
         }
 
-        $groups = array_reduce(CookiesRegistrarFactory::getInstance()->getCategories(), function ($results, $category) use ($key) {
+        $groups = array_reduce(CookiesRegistrarFactory::getInstance()
+            ->getCategories(), function ($results, $category) use ($key) {
             return array_reduce($category->getDefined(), function (array $results, Cookie|CookiesGroup $instance) use ($key) {
                 if (is_a($instance, CookiesGroup::class) && $instance->name === $key) {
                     $results[] = $instance;
@@ -123,7 +125,8 @@ class CookiesManager {
      */
     public function accept(string|array $categories = '*'): ConsentResponse {
         if (!is_array($categories) || !$categories) {
-            $categories = array_map(fn($category) => $category->key(), CookiesRegistrarFactory::getInstance()->getCategories());
+            $categories = array_map(fn($category) => $category->key(), CookiesRegistrarFactory::getInstance()
+                ->getCategories());
         }
 
         $this->preferences = $this->makeConsentSettings($categories);

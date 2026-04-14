@@ -5,12 +5,12 @@ namespace JSzD\VanillaCookieConsent\Http;
 class Cookie {
     protected string $name;
     protected string $value;
-    protected int $minutes;
+    protected int    $minutes;
     protected string $path;
     protected string $domain;
-    protected bool $secure;
-    protected bool $httpOnly;
-    protected bool $raw;
+    protected bool   $secure;
+    protected bool   $httpOnly;
+    protected bool   $raw;
     protected string $sameSite;
 
     public static function make(string $name, ?string $value = '', int $minutes = 0, ?string $path = null, ?string $domain = null, bool $secure = false, bool $httpOnly = false, bool $raw = true, ?string $sameSite = null): self {

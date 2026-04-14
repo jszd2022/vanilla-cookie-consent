@@ -7,7 +7,7 @@ class Proxy {
     protected static $factory;
 
     public static function __callStatic($name, $arguments) {
-        if(isset(static::$factory) && method_exists(static::$factory, 'getInstance')) {
+        if (isset(static::$factory) && method_exists(static::$factory, 'getInstance')) {
             $object = (static::$factory)::getInstance();
         } else {
             $object = new (static::$class)();
