@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use JSzD\VanillaCookieConsent\ConsentResponse;
 use JSzD\VanillaCookieConsent\Cookie;
 use JSzD\VanillaCookieConsent\CookiesGroup;
-use JSzD\VanillaCookieConsent\Factories\CookiesRegistarFactory;
+use JSzD\VanillaCookieConsent\Factories\CookiesRegistrarFactory;
 use JSzD\VanillaCookieConsent\Factories\SingletonFactory;
 use JSzD\VanillaCookieConsent\Helpers\Config;
 use JSzD\VanillaCookieConsent\CookiesRegistrar;
@@ -59,7 +59,7 @@ class CookiesManager extends SingletonFactory {
      * Create fresh cookie data for the given consented categories.
      */
     protected function makeConsentSettings(array $categories): array {
-        return array_reduce(CookiesRegistarFactory::getInstance()->getCategories(), function ($values, $category) use ($categories) {
+        return array_reduce(CookiesRegistrarFactory::getInstance()->getCategories(), function ($values, $category) use ($categories) {
             $state = in_array($category->key(), $categories);
             return array_reduce($category->getCookies(), function ($values, $cookie) use ($state) {
                 $values[$cookie->name] = $state;
@@ -72,7 +72,7 @@ class CookiesManager extends SingletonFactory {
      * Transfer all undefined method calls to the registrar.
      */
     public function __call(string $method, array $arguments) {
-        return CookiesRegistarFactory::getInstance()->$method(...$arguments);
+        return CookiesRegistrarFactory::getInstance()->$method(...$arguments);
     }
 
     /**
@@ -85,7 +85,7 @@ class CookiesManager extends SingletonFactory {
         }
 
         // Check if each defined cookie hasn't been shown to the user yet.
-        return array_reduce(CookiesRegistarFactory::getInstance()->getCategories(), function ($state, $category) {
+        return array_reduce(CookiesRegistrarFactory::getInstance()->getCategories(), function ($state, $category) {
             return $state || array_reduce($category->getCookies(), function (bool $state, Cookie $cookie) {
                     return $state || !array_key_exists($cookie->name, $this->preferences);
                 }, false);
@@ -100,7 +100,7 @@ class CookiesManager extends SingletonFactory {
             return false;
         }
 
-        $groups = array_reduce(CookiesRegistarFactory::getInstance()->getCategories(), function ($results, $category) use ($key) {
+        $groups = array_reduce(CookiesRegistrarFactory::getInstance()->getCategories(), function ($results, $category) use ($key) {
             return array_reduce($category->getDefined(), function (array $results, Cookie|CookiesGroup $instance) use ($key) {
                 if (is_a($instance, CookiesGroup::class) && $instance->name === $key) {
                     $results[] = $instance;
@@ -125,7 +125,7 @@ class CookiesManager extends SingletonFactory {
      */
     public function accept(string|array $categories = '*'): ConsentResponse {
         if (!is_array($categories) || !$categories) {
-            $categories = array_map(fn($category) => $category->key(), CookiesRegistarFactory::getInstance()->getCategories());
+            $categories = array_map(fn($category) => $category->key(), CookiesRegistrarFactory::getInstance()->getCategories());
         }
 
         $this->preferences = $this->makeConsentSettings($categories);
@@ -142,7 +142,7 @@ class CookiesManager extends SingletonFactory {
      * current request's response.
      */
     protected function getConsentResponse(): ConsentResponse {
-        return array_reduce(CookiesRegistarFactory::getInstance()->getCategories(), function ($response, $category) {
+        return array_reduce(CookiesRegistrarFactory::getInstance()->getCategories(), function ($response, $category) {
             return array_reduce($category->getDefined(), function (ConsentResponse $response, Cookie|CookiesGroup $instance) {
                 return $this->hasConsentFor($instance->name)
                     ? $response->handleConsent($instance)
@@ -216,7 +216,7 @@ class CookiesManager extends SingletonFactory {
         }
 
         return lcc_render_view('cookies', [
-            'cookies' => CookiesRegistarFactory::getInstance(),
+            'cookies' => CookiesRegistrarFactory::getInstance(),
             'policy'  => $policy,
         ]);
     }
@@ -270,13 +270,13 @@ class CookiesManager extends SingletonFactory {
      */
     public function renderInfo(): string {
         return lcc_render_view('info', [
-            'cookies' => CookiesRegistarFactory::getInstance(),
+            'cookies' => CookiesRegistrarFactory::getInstance(),
         ]);
     }
 
     public function replaceInfoTag(string $wysiwyg): string {
         $cookieConsentInfo = lcc_render_view('info', [
-            'cookies' => CookiesRegistarFactory::getInstance(),
+            'cookies' => CookiesRegistrarFactory::getInstance(),
         ]);
 
         $formattedString = preg_replace(
@@ -299,7 +299,7 @@ class CookiesManager extends SingletonFactory {
         // Translation
         Translation::setLocale($locale);
 
-        CookiesRegistarFactory::getInstance()->essentials()->consent();
+        CookiesRegistrarFactory::getInstance()->essentials()->consent();
     }
 
     public function setTranslations(array $translations = []): void {

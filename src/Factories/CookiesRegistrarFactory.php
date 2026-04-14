@@ -7,6 +7,6 @@ use JSzD\VanillaCookieConsent\CookiesRegistrar;
 /**
  * @method static CookiesRegistrar getInstance()
  */
-class CookiesRegistarFactory extends SingletonFactory {
+class CookiesRegistrarFactory extends SingletonFactory {
     protected static $class = CookiesRegistrar::class;
 }
