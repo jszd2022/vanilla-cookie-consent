@@ -12,6 +12,5 @@ use JSzD\VanillaCookieConsent\Factories\ConfigFactory;
  * @method static string resolveView(string $name)
  */
 class Config extends Proxy {
-    protected $factory = ConfigFactory::class;
-
+    protected static $factory = ConfigFactory::class;
 }

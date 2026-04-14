@@ -12,5 +12,5 @@ use JSzD\VanillaCookieConsent\Factories\TranslationFactory;
  * @method static array getTranslations()
  */
 class Translation extends Proxy {
-    protected $factory = TranslationFactory::class;
+    protected static $factory = TranslationFactory::class;
 }
