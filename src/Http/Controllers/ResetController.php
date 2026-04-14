@@ -18,8 +18,8 @@ class ResetController extends Controller {
             ]);
 
         return $response->withoutCookie(
-            cookie: lcc_config('cookieconsent.cookie.name'),
-            domain: lcc_config('cookieconsent.cookie.domain'),
+            cookie: lcc_config('cookie.name'),
+            domain: lcc_config('cookie.domain'),
         );
     }
 }

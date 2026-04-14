@@ -6,7 +6,7 @@ use JSzD\VanillaCookieConsent\Http\Response;
 
 abstract class Controller {
     public static function handleRequest(): void {
-        $response = (new static())();
+        $response = (new static())->handle();
         $response->send();
     }
 
