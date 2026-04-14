@@ -7,7 +7,7 @@ trait HasTranslations {
      * Get a translation string when defined.
      */
     public function translate(string $key, ?string $default = null): ?string {
-        $key = 'cookieConsent::cookies.' . $key;
+        $key = 'cookies.' . $key;
         $value = lcc_trans($key);
 
         return ($value === $key)

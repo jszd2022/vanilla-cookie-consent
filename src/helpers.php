@@ -55,7 +55,7 @@ if (!function_exists('lcc_route')) {
 }
 
 if (!function_exists('lcc_trans')) {
-    function lcc_trans(string $key, array $replace = [], string $locale = null): string {
+    function lcc_trans(string $key, array $replace = [], string $locale = null): string|array {
         return Translation::get($key, $replace, $locale);
     }
 }

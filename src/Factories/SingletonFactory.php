@@ -9,7 +9,6 @@ abstract class SingletonFactory {
 
     public static function getInstance() {
         if ((static::$instances[static::$class] ?? null) === null) {
-            var_dump('SingletonFactory::create:', static::$class);
             static::$instances[static::$class] = new (static::$class)();
         }
         return static::$instances[static::$class];

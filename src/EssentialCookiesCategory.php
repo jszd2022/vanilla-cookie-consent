@@ -10,9 +10,9 @@ class EssentialCookiesCategory extends CookiesCategory
     public function consent(): static
     {
         return $this->cookie(function(Cookie $cookie) {
-            $cookie->name(lcc_config('cookieconsent.cookie.name'))
-                ->duration(lcc_config('cookieconsent.cookie.duration'))
-                ->description(lcc_trans('cookieConsent::cookies.defaults.consent'));
+            $cookie->name(lcc_config('cookie.name'))
+                ->duration(lcc_config('cookie.duration'))
+                ->description(lcc_trans('defaults.consent'));
         });
     }
 
@@ -24,7 +24,7 @@ class EssentialCookiesCategory extends CookiesCategory
         return $this->cookie(function(Cookie $cookie) {
             $cookie->name(lcc_config('session.cookie'))
                 ->duration(lcc_config('session.lifetime'))
-                ->description(lcc_trans('cookieConsent::cookies.defaults.session'));
+                ->description(lcc_trans('defaults.session'));
         });
     }
 

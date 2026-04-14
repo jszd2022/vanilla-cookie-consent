@@ -27,5 +27,5 @@ use JSzD\VanillaCookieConsent\Helpers\Proxy;
  * @method static void setTranslations(array $translations = [])
  */
 class Cookies extends Proxy {
-    protected $factory = CookiesManagerFactory::class;
+    protected static $factory = CookiesManagerFactory::class;
 }
