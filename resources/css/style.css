@@ -8,15 +8,16 @@
     overflow: auto;
     z-index: 9999;
     transition: transform 200ms ease-out,
-                opacity 200ms ease-out;
+    opacity 200ms ease-out;
 
-    .cookies--closing {
+    &.cookies--closing {
         opacity: 0;
         transform: translateY(10px);
     }
-    .cookies--show {
+
+    &.cookies--show {
         .cookies__btn {
-            .cookies__btn--customize {
+            &.cookies__btn--customize {
                 border-top: none;
                 border-bottom: 1px solid #E7E8E9;
             }
@@ -27,14 +28,14 @@
         }
     }
 
-    .cookies--no-js {
+    &.cookies--no-js {
         .cookies__section .cookies__expandable,
         .cookies__expandable:target {
             height: auto;
             visibility: visible;
             opacity: 1;
             transition: height 300ms ease-out,
-                        opacity 300ms ease-out;
+            opacity 300ms ease-out;
         }
 
         .cookies__details {
@@ -50,7 +51,8 @@
         }
     }
 }
-#cookies-policy .cookies {
+
+#cookies-policy {
     .cookies__expandable {
         display: block;
         overflow: hidden;
@@ -58,15 +60,15 @@
         visibility: hidden;
         opacity: 0;
         transition: height 300ms ease-out,
-                    opacity 300ms ease-out,
-                    visibility 0s 300ms linear;
+        opacity 300ms ease-out,
+        visibility 0s 300ms linear;
 
-        .cookies__expandable--open{
+        &.cookies__expandable--open {
             height: auto;
             visibility: visible;
             opacity: 1;
             transition: height 300ms ease-out,
-                        opacity 300ms ease-out;
+            opacity 300ms ease-out;
         }
     }
 
@@ -90,16 +92,16 @@
         visibility: visible;
         opacity: 1;
         transition: height 300ms ease-out,
-                    opacity 300ms ease-out,
-                    visibility 0s 100ms linear;
+        opacity 300ms ease-out,
+        visibility 0s 100ms linear;
 
-        .cookies__container--hide {
+        &.cookies__container--hide {
             height: 0;
             visibility: hidden;
             opacity: 0;
             transition: height 300ms ease-out,
-                        opacity 300ms ease-out,
-                        visibility 0s 300ms linear;
+            opacity 300ms ease-out,
+            visibility 0s 300ms linear;
         }
     }
 
@@ -149,7 +151,7 @@
     }
 
     .cookies__btn {
-        .cookies__btn--customize {
+        &.cookies__btn--customize {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -210,6 +212,7 @@
             top: 50%;
             border-radius: 1.4em;
         }
+
         &:after {
             right: 0;
             width: 2.5em;
@@ -219,6 +222,7 @@
             z-index: 0;
             transition: background 200ms ease-out, opacity 200ms ease-out;
         }
+
         &:before {
             right: 0.75em;
             width: 1em;
@@ -313,8 +317,10 @@
     }
 }
 
-#cookies-policy .cookiesBtn {
-    width: 100%;
+#cookies-policy {
+    .cookiesBtn {
+        width: 100%;
+    }
 
     .cookiesBtn__link {
         display: block;
