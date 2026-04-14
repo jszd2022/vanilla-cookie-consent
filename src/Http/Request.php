@@ -40,7 +40,10 @@ class Request {
         return str_contains($accept, '/json') || str_contains($accept, '+json');
     }
 
-    public function cookie(string $name): string {
+    public function cookie(string|null $name): string|null {
+        if ($name === null) {
+            return null;
+        }
         return $_COOKIE[$name] ?? '';
     }
 }
