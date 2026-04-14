@@ -20,6 +20,12 @@ return [
         'name'     => 'cookie_consent',
         'duration' => (60 * 24 * 365),
         'domain'   => null,
+        'secure'   => false, // Set this to true if your site is served over HTTPS
+    ],
+
+    'session' => [
+        'cookie' => 'PHPSESSID', // default php session cookie name
+        'lifetime' => 24, // default php session lifetime is 24 minutes
     ],
 
     /*
@@ -35,7 +41,9 @@ return [
 
     'policy'           => null,
 
-    /* Google Analytics configuration
+    /*
+    |--------------------------------------------------------------------------
+    | Google Analytics configuration
     |--------------------------------------------------------------------------
     |
     | If you use Google Analytics, you can configure the package to automatically
@@ -52,12 +60,19 @@ return [
         'anonymize_ip' => '',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Routes configuration
+    |--------------------------------------------------------------------------
+    | Used by the JavaScript functions
+    |
+    */
     'routes' => [
-        'cookieconsent.script'               => '/cookie-consent/script',
-        'cookieconsent.accept.all'           => '/cookie-consent/accept-all',
-        'cookieconsent.accept.essentials'    => '/cookie-consent/accept-essentials',
-        'cookieconsent.accept.configuration' => '/cookie-consent/configure',
-        'cookieconsent.reset'                => '/cookie-consent/reset',
+        'script'               => '/cookie-consent/script',
+        'accept-all'           => '/cookie-consent/accept-all',
+        'accept-essentials'    => '/cookie-consent/accept-essentials',
+        'accept-configuration' => '/cookie-consent/configure',
+        'reset'                => '/cookie-consent/reset',
     ],
 ];
 
