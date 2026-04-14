@@ -3,14 +3,14 @@
 namespace JSzD\VanillaCookieConsent\Helpers;
 
 class Proxy {
-    protected $class;
-    protected $factory;
+    protected static $class;
+    protected static $factory;
 
-    public function __call($name, $arguments) {
-        if(isset($this->factory) && method_exists($this->factory, 'getInstance')) {
-            $object= ($this->factory)::getInstance();
+    public static function __callStatic($name, $arguments) {
+        if(isset(static::$factory) && method_exists(static::$factory, 'getInstance')) {
+            $object = (static::$factory)::getInstance();
         } else {
-            $object = new ($this->class)();
+            $object = new (static::$class)();
         }
 
         return $object->$name(...$arguments);
