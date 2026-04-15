@@ -212,9 +212,7 @@ class CookiesManager {
     }
 
     public function getNoticeMarkup(): string {
-        if ($policy = lcc_config('policy')) {
-            $policy = lcc_route($policy);
-        }
+        $policy = lcc_config('policy');
 
         return lcc_render_view('cookies', [
             'cookies' => CookiesRegistrarFactory::getInstance(),
