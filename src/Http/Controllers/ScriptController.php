@@ -8,7 +8,7 @@ use JSzD\VanillaCookieConsent\Http\Response;
 
 class ScriptController extends Controller {
     public function handle(): Response {
-        $content = str_replace('{config:1}', $this->generateConfig(), file_get_contents(LCC_ROOT . '/resources/js/Cookies.js'));
+        $content = str_replace('php_config', $this->generateConfig(), file_get_contents(LCC_ROOT . '/resources/js/Cookies.js'));
         return Response::make($content)->withHeaders(['Content-Type' => 'application/javascript']);
     }
 
