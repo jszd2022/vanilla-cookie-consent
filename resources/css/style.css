@@ -1,11 +1,3 @@
-:root {
-    --cookies-policy-bg: #fff;
-    --cookies-policy-text: #2C2E30;
-    --cookies-policy-border: #E7E8E9;
-    --cookies-policy-btn-bg: #7959EF;
-    --cookies-policy-btn-text: #fff;
-}
-
 /* RESET */
 #cookies-policy {
     p, ul, a, form {
@@ -34,7 +26,7 @@
         .cookies__btn {
             &.cookies__btn--customize {
                 border-top: none;
-                border-bottom: 1px solid var(--cookies-policy-border);
+                border-bottom: 1px solid #E7E8E9;
             }
 
             svg {
@@ -92,9 +84,9 @@
         max-width: 90%;
         max-height: 90%;
         margin: 4%;
-        background: var(--cookies-policy-bg);
+        background: #fff;
         border-radius: 8px;
-        border: 1px solid var(--cookies-policy-border);
+        border: 1px solid #E7E8E9;
         -webkit-box-shadow: 0 12px 12px -8px rgba(0, 0, 0, 0.08), 0 0 4px rgba(0, 0, 0, 0.04);
         -moz-box-shadow: 0px 12px 12px -8px rgba(0, 0, 0, 0.08), 0px 0px 4px rgba(0, 0, 0, 0.04);
         box-shadow: 0 12px 12px -8px rgba(0, 0, 0, 0.08), 0 0 4px rgba(0, 0, 0, 0.04);
@@ -128,14 +120,14 @@
         font-weight: bold;
         line-height: 1.4em;
         margin-bottom: 0.8em;
-        color: var(--cookies-policy-text);
+        color: #2C2E30;
     }
 
     .cookies__intro {
         font-weight: 450;
         font-size: 0.875em;
         line-height: 1.4em;
-        color: var(--cookies-policy-text);
+        color: #2C2E30;
 
         p {
             margin-top: 1em;
@@ -152,7 +144,7 @@
 
             &:hover,
             &:focus {
-                color: var(--cookies-policy-btn-bg);
+                color: #7959EF;
             }
         }
     }
@@ -174,10 +166,10 @@
             font-size: 0.875em;
             line-height: 1em;
             text-decoration: none;
-            color: var(--cookies-policy-text);
+            color: #2C2E30;
             position: relative;
             padding: 1.125em 24px;
-            border-top: 1px solid var(--cookies-policy-border);
+            border-top: 1px solid #E7E8E9;
         }
 
         svg {
@@ -233,7 +225,7 @@
             width: 2.5em;
             height: 1.4em;
             margin-top: -0.7em;
-            background: var(--cookies-policy-border);
+            background: #E7E8E9;
             z-index: 0;
             transition: background 200ms ease-out, opacity 200ms ease-out;
         }
@@ -243,7 +235,7 @@
             width: 1em;
             height: 1em;
             margin-top: -0.5em;
-            background: var(--cookies-policy-bg);
+            background: #fff;
             z-index: 1;
             transform: translateX(-0.55em);
             transition: transform 200ms ease-out;
@@ -252,7 +244,7 @@
     }
 
     .cookies__category input:checked + .cookies__box:after {
-        background: var(--cookies-policy-btn-bg);
+        background: #7959EF;
         opacity: 1;
     }
 
@@ -267,26 +259,26 @@
     .cookies__label {
         font-size: 0.875em;
         font-weight: 600;
-        color: var(--cookies-policy-text);
+        color: #2C2E30;
     }
 
     .cookies__info {
         font-weight: 450;
         font-size: 0.875em;
         line-height: 1.4em;
-        color: var(--cookies-policy-text);
+        color: #2C2E30;
     }
 
     .cookies__details {
         display: block;
-        color: var(--cookies-policy-btn-bg);
+        color: #7959EF;
         font-size: 0.875em;
         margin: 0.625em 0 0.9em;
         transition: color 200ms ease-out;
 
         &:hover,
         &:focus {
-            color: var(--cookies-policy-btn-bg);
+            color: #7959EF;
         }
     }
 
@@ -324,7 +316,7 @@
     }
 
     .cookies__save {
-        border-top: 1px solid var(--cookies-policy-border);
+        border-top: 1px solid #E7E8E9;
         padding: 0.75em 1.5em;
         margin-top: 0.4em;
         display: flex;
@@ -342,9 +334,9 @@
         font: inherit;
         font-size: 14px;
         font-weight: 600;
-        color: var(--cookies-policy-btn-text);
-        background: var(--cookies-policy-btn-bg);
-        border: 1px solid var(--cookies-policy-btn-bg);
+        color: #fff;
+        background: #7959EF;
+        border: 1px solid #7959EF;
         border-radius: 4px;
         margin: 0;
         padding: 0.86em 1em;
