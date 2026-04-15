@@ -2,9 +2,9 @@
     <h3><?= $category->title ?></h3>
     <table>
         <thead>
-        <th><?= lcc_trans('cookies.cookie') ?></th>
-        <th><?= lcc_trans('cookies.purpose') ?></th>
-        <th><?= lcc_trans('cookies.duration') ?></th>
+        <th><?= lcc_trans('cookie') ?></th>
+        <th><?= lcc_trans('purpose') ?></th>
+        <th><?= lcc_trans('duration') ?></th>
         </thead>
         <tbody>
         <?php foreach ($category->getCookies() as $cookie): ?>
