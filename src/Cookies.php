@@ -3,7 +3,9 @@
 namespace JSzD\VanillaCookieConsent;
 
 use Closure;
+use JSzD\VanillaCookieConsent\Factories\ConfigFactory;
 use JSzD\VanillaCookieConsent\Factories\CookiesManagerFactory;
+use JSzD\VanillaCookieConsent\Factories\TranslationFactory;
 
 /**
  * @method static bool shouldDisplayNotice()
@@ -22,9 +24,21 @@ use JSzD\VanillaCookieConsent\Factories\CookiesManagerFactory;
  * @method static CookiesRegistrar category(string $key, ?Closure $maker = null)
  * @method static array getCategories()
  * @method static bool hasCategory(string $key)
- * @method static void boot(array $config = [], string $locale = 'en', array $translations = [])
  */
 class Cookies {
+    public static function boot(array $config = [], array $translations = [], string $locale = 'en'): void {
+        if (!defined('LCC_ROOT')) {
+            define('LCC_ROOT', realpath(__DIR__ . '/..'));
+        }
+
+        // Config
+        ConfigFactory::getInstance()->setConfig($config);
+
+        // Translation
+        TranslationFactory::getInstance()->setLocale($locale);
+        TranslationFactory::getInstance()->setTranslations($translations);
+    }
+
     public static function __callStatic($name, $arguments) {
         $cookiesManager = CookiesManagerFactory::getInstance();
 

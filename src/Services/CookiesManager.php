@@ -27,10 +27,6 @@ class CookiesManager {
      * Create a new Service Manager instance.
      */
     public function __construct() {
-        if (!defined('LCC_ROOT')) {
-            define('LCC_ROOT', realpath(__DIR__ . '/../..'));
-        }
-
         $request = new HttpRequest();
         $this->preferences = $this->getCurrentConsentSettings($request);
     }
@@ -292,16 +288,6 @@ class CookiesManager {
         return $formattedString;
     }
 
-
-    public function boot(array $config = [], string $locale = 'en', array $translations = []): void {
-        // Config
-        ConfigFactory::getInstance()->setConfig($config);
-
-        // Translation
-        TranslationFactory::getInstance()->setLocale($locale);
-        TranslationFactory::getInstance()->setTranslations($translations);
-    }
-    
     public function consentToEssentials(): void {
         CookiesRegistrarFactory::getInstance()->essentials()->consent();
     }
