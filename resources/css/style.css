@@ -3,6 +3,12 @@
     p, ul, a, form {
         margin: 0;
     }
+    h2, h3 {
+        font-size: 1em;
+    }
+    * {
+        font-family: inherit;
+    }
 }
 
 #cookies-policy.cookies {
