@@ -56,26 +56,34 @@ class ConfigService {
     }
 
     public function resolveView(string $name): string {
-        [$dir, $custom] = $this->resolveViewsDir();
+        $user_dir = $this->resolveViewsDir();
+        $package_dir = LCC_ROOT . '/resources/views';
+
         $name = $name . '.php';
 
-        if ($custom) {
-            if (file_exists($dir . '/' . $name)) {
-                return $dir . '/' . $name;
+        if ($user_dir) {
+            if (file_exists($user_dir . '/' . $name)) {
+                return $user_dir . '/' . $name;
             }
-            return LCC_ROOT . '/resources/views' . '/' . $name;
         }
-        return $dir . '/' . $name;
+        return $package_dir . '/' . $name;
     }
 
-    protected function resolveViewsDir(): array {
+    protected function resolveViewsDir(): ?string {
         $dir = $this->config['views_dir'] ?? null;
 
         if ($dir && file_exists($dir)) {
-            return [$dir, true];
+            return $dir;
         }
+        return null;
+    }
 
-        $dir = LCC_ROOT . '/resources/views';
-        return [$dir, true];
+    public function resolveLangDir(): ?string {
+        $dir = $this->config['lang_dir'] ?? null;
+
+        if ($dir && file_exists($dir)) {
+            return $dir;
+        }
+        return null;
     }
 }
