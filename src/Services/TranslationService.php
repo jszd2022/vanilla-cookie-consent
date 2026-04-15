@@ -2,23 +2,42 @@
 
 namespace JSzD\VanillaCookieConsent\Services;
 
+use JSzD\VanillaCookieConsent\Factories\ConfigFactory;
+
 class TranslationService {
-    private array  $translations = [];
+    private ?array $translations = null;
     private string $locale       = 'en';
 
-    public function __construct() {
-        $lang_dir = LCC_ROOT . '/resources/lang';
+    private function loadTranslations(): void {
+        if ($this->translations === null) {
+            $user_dir = ConfigFactory::getInstance()->resolveLangDir();
+            $package_dir = LCC_ROOT . '/resources/lang';
 
-        $available_locales = array_diff(scandir($lang_dir), array('.', '..'));
+            $available_locales = array_diff(scandir($package_dir), array('.', '..'));
 
-        foreach ($available_locales as $locale) {
-            $localization = require $lang_dir . '/' . $locale . '/cookies.php';
-            $this->translations[$locale] = $localization;
+            if ($user_dir) {
+                $available_locales = array_merge($available_locales, array_diff(scandir($user_dir), array('.', '..')));
+            }
+
+            $locale = $this->locale;
+
+            if (!in_array($this->locale, $available_locales)) {
+                $locale = 'en';
+            }
+
+            if ($user_dir && file_exists($user_dir . '/' . $locale . '/cookies.php')) {
+                $localization = require $user_dir . '/' . $this->locale . '/cookies.php';
+            } else {
+                $localization = require $package_dir . '/' . $this->locale . '/cookies.php';
+            }
+
+            $this->translations = $localization;
         }
     }
 
     public function get(string $key, array $replace = [], string $locale = null): mixed {
-        $value = $this->translations[($locale ?? $this->locale)] ?? [];
+        $this->loadTranslations();
+        $value = $this->translations ?? [];
 
         foreach (explode('.', $key) as $segment) {
             if (!is_array($value) || !array_key_exists($segment, $value)) {
@@ -46,10 +65,7 @@ class TranslationService {
     }
 
     public function setTranslations(array $config): void {
+        $this->loadTranslations();
         $this->translations = array_replace_recursive($this->translations, $config);
-    }
-
-    public function getTranslations(): array {
-        return $this->translations;
     }
 }
