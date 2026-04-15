@@ -60,7 +60,7 @@ use JSzD\VanillaCookieConsent\Cookies;
                                     <?php foreach ($category->getCookies() as $cookie) : ?>
                                         <li class="cookies__cookie">
                                             <p class="cookies__name"><?= $cookie->name ?></p>
-                                            <p class="cookies__duration"><?= lcc_minutesHumanReadable($cookie->duration) ?></p>
+                                            <p class="cookies__duration"><?= Carbon\Carbon::now()->diffForHumans(Carbon\Carbon::now()->addMinutes($cookie->duration), true) ?></p>
                                             <?php if ($cookie->description): ?>
                                                 <p class="cookies__description"><?= $cookie->description ?></p>
                                             <?php endif; ?>

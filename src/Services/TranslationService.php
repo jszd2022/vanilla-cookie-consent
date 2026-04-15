@@ -58,6 +58,7 @@ class TranslationService {
 
     public function setLocale(string $locale): void {
         $this->locale = $locale;
+        \Carbon\Carbon::setLocale($locale);
     }
 
     public function getLocale(): string {

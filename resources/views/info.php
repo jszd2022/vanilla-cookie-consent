@@ -11,7 +11,7 @@
             <tr>
                 <td><?= $cookie->name ?></td>
                 <td><?= $cookie->description ?></td>
-                <td><?= lcc_minutesHumanReadable($cookie->duration) ?></td>
+                <td><?= \Carbon\CarbonInterval::minutes($cookie->duration)->cascade() ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
