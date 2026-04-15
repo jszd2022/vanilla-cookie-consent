@@ -33,7 +33,7 @@ class Response {
     public static function redirectBack(): self {
         $obj = new self;
         $obj->is_redirect = true;
-        $obj->redirect_url = Request::fullUrl();
+        $obj->redirect_url = $_SERVER['HTTP_REFERER'] ?? '/';
         $obj->status = 302;
         return $obj;
     }
@@ -59,16 +59,23 @@ class Response {
             header("$key: $value");
         }
 
+        // set content type
+        if (empty($this->headers['Content-Type'])) {
+            header("Content-Type: $this->type");
+        }
+
         // set cookies
-        foreach ($this->cookies as $cookie) {
-            $cookie->setCookie();
+        foreach ($this->cookies as $domain => $paths) {
+            foreach ($paths as $path => $cookies) {
+                foreach ($cookies as $cookie) {
+                    $cookie->setCookie();
+                }
+            }
         }
 
         // set status
         http_response_code($this->status);
 
-        // set content type
-        header("Content-Type: $this->type");
 
         // handle redirects
         if ($this->is_redirect) {

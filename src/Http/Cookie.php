@@ -11,15 +11,16 @@ class Cookie {
     protected bool   $secure;
     protected bool   $httpOnly;
     protected bool   $raw;
-    protected string $sameSite;
+    protected ?string $sameSite;
 
-    public static function make(string $name, ?string $value = '', int $minutes = 0, ?string $path = null, ?string $domain = null, bool $secure = false, bool $httpOnly = false, bool $raw = true, ?string $sameSite = null): self {
+
+    public static function make(string $name, ?string $value = '', int $minutes = 0, ?string $path = '/', ?string $domain = '', bool $secure = false, bool $httpOnly = false, bool $raw = true, ?string $sameSite = null): self {
         $obj = new self;
         $obj->name = $name;
         $obj->value = $value ?? '';
         $obj->minutes = $minutes;
-        $obj->path = $path;
-        $obj->domain = $domain;
+        $obj->path = $path ?? '/';
+        $obj->domain = $domain ?? '';
         $obj->secure = $secure;
         $obj->httpOnly = $httpOnly;
         $obj->raw = $raw;
@@ -40,6 +41,7 @@ class Cookie {
     }
 
     public function setCookie(): void {
-        setcookie($this->name, $this->value, $this->minutes, $this->path, $this->domain, $this->secure, $this->httpOnly);
+        $timestamp = time() + ($this->minutes * 60);
+        setcookie($this->name, $this->value, $timestamp, $this->path, $this->domain, $this->secure, $this->httpOnly);
     }
 }
