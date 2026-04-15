@@ -1,4 +1,3 @@
-
 class VanillaCookieConsent {
     config;
 
@@ -7,17 +6,17 @@ class VanillaCookieConsent {
     }
 
     acceptAll() {
-        return this.request(this.config['accept.all'])
+        return this.request(this.config['accept-all'])
             .then((data) => this.addScripts(data));
     }
 
     acceptEssentials() {
-        return this.request(this.config['accept.essentials'])
+        return this.request(this.config['accept-essentials'])
             .then((data) => this.addScripts(data));
     }
 
     configure(data) {
-        return this.request(this.config['accept.configuration'], data)
+        return this.request(this.config['accept-configuration'], data)
             .then((data) => this.addScripts(data));
     }
 
@@ -30,10 +29,10 @@ class VanillaCookieConsent {
         return fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json',
             },
-            body: data ? JSON.stringify(data) : null,
+            body: data,
         }).then((response) => response.json());
     }
 
@@ -91,5 +90,5 @@ class VanillaCookieConsent {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    window.VanillaCookieConsent = new VanillaCookieConsent({ config: 1 });
+    window.VanillaCookieConsent = new VanillaCookieConsent(php_config);
 });

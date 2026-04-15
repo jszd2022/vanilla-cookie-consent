@@ -1,11 +1,11 @@
 var cookies = document.querySelector('#cookies-policy');
 var reset = document.querySelector('.cookiereset');
 
-if(reset) {
+if (reset) {
     reset.addEventListener('submit', (event) => resetCookies(event))
 }
 
-if(cookies) {
+if (cookies) {
     var customize = cookies.querySelector('.cookies__btn--customize');
     var details = cookies.querySelectorAll('.cookies__details');
     var acceptAll = cookies.querySelector('.cookiesBtn--accept');
@@ -30,12 +30,12 @@ function initCookies() {
     cookies.classList.remove('cookies--no-js');
     cookies.classList.add('cookies--closing');
 
-    setTimeout(function() {
+    setTimeout(function () {
         cookies.classList.remove('cookies--closing');
     }, 310);
 }
 
-function configureCookies(event)  {
+function configureCookies(event) {
     event.preventDefault();
     window.VanillaCookieConsent.configure(new FormData(event.target));
     close();
@@ -55,7 +55,7 @@ function acceptEssentialsCookies(event) {
 
 function resetCookies(event) {
     event.preventDefault();
-    if(document.querySelector('#cookies-policy')) return;
+    if (document.querySelector('#cookies-policy')) return;
     window.VanillaCookieConsent.reset()
 }
 
@@ -80,11 +80,11 @@ function toggleExpand(event, el, hide = true) {
 
     changeText(hide, isOpen, event);
 
-    setTimeout(((cookies) => function() {
+    setTimeout(((cookies) => function () {
         element.classList.toggle('cookies__expandable--open');
         element.setAttribute('style', 'height:' + (isOpen ? 0 : height) + 'px');
 
-        setTimeout(function() {
+        setTimeout(function () {
             element.removeAttribute('style');
         }, 310);
     })(cookies), 10);
@@ -93,7 +93,7 @@ function toggleExpand(event, el, hide = true) {
 }
 
 function changeText(hide, isOpen, event) {
-    if(hide) return;
+    if (hide) return;
 
     event.target.textContent = isOpen
         ? text.more
@@ -101,19 +101,19 @@ function changeText(hide, isOpen, event) {
 }
 
 function hideNotice(hide, isOpen) {
-    if(!hide) return;
+    if (!hide) return;
 
     var container = cookies.querySelector('.cookies__container'),
         containerHeight = container.firstElementChild.offsetHeight;
 
     container.setAttribute('style', 'height:' + (!isOpen ? containerHeight : 0) + 'px');
 
-    setTimeout(((cookies) => function() {
+    setTimeout(((cookies) => function () {
         cookies.classList.toggle('cookies--show')
         container.classList.toggle('cookies__container--hide');
         container.setAttribute('style', 'height:' + (isOpen ? containerHeight : 0) + 'px');
 
-        setTimeout(function() {
+        setTimeout(function () {
             container.removeAttribute('style');
         }, 320);
     })(cookies), 10);
@@ -122,16 +122,18 @@ function hideNotice(hide, isOpen) {
 function close() {
     cookies.classList.add('cookies--closing');
 
-    setTimeout(((cookies) => { return () => {
-        if (!cookies.parentNode) return;
+    setTimeout(((cookies) => {
+        return () => {
+            if (!cookies.parentNode) return;
 
-        let scripts = cookies.parentNode.querySelectorAll('[data-cookie-consent]');
+            let scripts = cookies.parentNode.querySelectorAll('[data-cookie-consent]');
 
-        scripts.forEach(script => {
-            script.parentNode.removeChild(script);
-        });
+            scripts.forEach(script => {
+                script.parentNode.removeChild(script);
+            });
 
-        cookies.parentNode.removeChild(cookies);
+            cookies.parentNode.removeChild(cookies);
 
-    }})(cookies), 210);
+        }
+    })(cookies), 210);
 }
