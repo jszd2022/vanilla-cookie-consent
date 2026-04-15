@@ -6,11 +6,13 @@ use InvalidArgumentException;
 use JSzD\VanillaCookieConsent\ConsentResponse;
 use JSzD\VanillaCookieConsent\Cookie;
 use JSzD\VanillaCookieConsent\CookiesGroup;
+use JSzD\VanillaCookieConsent\Factories\ConfigFactory;
 use JSzD\VanillaCookieConsent\Factories\CookiesRegistrarFactory;
+use JSzD\VanillaCookieConsent\Factories\TranslationFactory;
 use JSzD\VanillaCookieConsent\Helpers\Config;
 use JSzD\VanillaCookieConsent\Helpers\Translation;
-use JSzD\VanillaCookieConsent\Http\Request;
-use JSzD\VanillaCookieConsent\Http\Cookie as HttpCookie;
+use JSzD\VanillaCookieConsent\Http\HttpRequest;
+use JSzD\VanillaCookieConsent\Http\HttpCookie as HttpCookie;
 use function filemtime;
 
 class CookiesManager {
@@ -29,14 +31,14 @@ class CookiesManager {
             define('LCC_ROOT', realpath(__DIR__ . '/../..'));
         }
 
-        $request = new Request();
+        $request = new HttpRequest();
         $this->preferences = $this->getCurrentConsentSettings($request);
     }
 
     /**
      * Retrieve the eventual existing cookie data.
      */
-    protected function getCurrentConsentSettings(Request $request): ?array {
+    protected function getCurrentConsentSettings(HttpRequest $request): ?array {
         $preferences = ($raw = $request->cookie(lcc_config('cookie.name')))
             ? json_decode($raw, true)
             : null;
@@ -291,17 +293,16 @@ class CookiesManager {
     }
 
 
-    public function boot(array $config = [], string $locale = 'en'): void {
+    public function boot(array $config = [], string $locale = 'en', array $translations = []): void {
         // Config
-        Config::setConfig($config);
+        ConfigFactory::getInstance()->setConfig($config);
 
         // Translation
-        Translation::setLocale($locale);
-
-        CookiesRegistrarFactory::getInstance()->essentials()->consent();
+        TranslationFactory::getInstance()->setLocale($locale);
+        TranslationFactory::getInstance()->setTranslations($translations);
     }
-
-    public function setTranslations(array $translations = []): void {
-        Translation::setTranslations($translations);
+    
+    public function consentToEssentials(): void {
+        CookiesRegistrarFactory::getInstance()->essentials()->consent();
     }
 }

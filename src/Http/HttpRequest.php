@@ -5,7 +5,7 @@ namespace JSzD\VanillaCookieConsent\Http;
 /**
  * Laravel-like request helper.
  */
-class Request {
+class HttpRequest {
     public static function fullUrl(): string {
         $scheme = $_SERVER['HTTP_X_FORWARDED_PROTO']
             ?? ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http');

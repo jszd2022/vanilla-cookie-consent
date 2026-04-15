@@ -2,7 +2,7 @@
 
 namespace JSzD\VanillaCookieConsent\Http\Controllers;
 
-use JSzD\VanillaCookieConsent\Http\Response;
+use JSzD\VanillaCookieConsent\Http\HttpResponse;
 
 abstract class Controller {
     public static function handleRequest(): void {
@@ -10,5 +10,5 @@ abstract class Controller {
         $response->send();
     }
 
-    abstract public function handle(): Response;
+    abstract public function handle(): HttpResponse;
 }

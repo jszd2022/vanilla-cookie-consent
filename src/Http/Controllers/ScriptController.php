@@ -3,13 +3,13 @@
 namespace JSzD\VanillaCookieConsent\Http\Controllers;
 
 
-use JSzD\VanillaCookieConsent\Http\Request;
-use JSzD\VanillaCookieConsent\Http\Response;
+use JSzD\VanillaCookieConsent\Http\HttpRequest;
+use JSzD\VanillaCookieConsent\Http\HttpResponse;
 
 class ScriptController extends Controller {
-    public function handle(): Response {
+    public function handle(): HttpResponse {
         $content = str_replace('php_config', $this->generateConfig(), file_get_contents(LCC_ROOT . '/resources/js/Cookies.js'));
-        return Response::make($content)->withHeaders(['Content-Type' => 'application/javascript']);
+        return HttpResponse::make($content)->withHeaders(['Content-Type' => 'application/javascript']);
     }
 
     protected function generateConfig(): string {

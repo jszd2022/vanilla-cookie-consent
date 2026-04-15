@@ -3,7 +3,7 @@
 namespace JSzD\VanillaCookieConsent;
 
 use Exception;
-use JSzD\VanillaCookieConsent\Http\Cookie as HttpCookie;
+use JSzD\VanillaCookieConsent\Http\HttpCookie;
 
 class Consent {
     /**

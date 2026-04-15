@@ -4,7 +4,6 @@ namespace JSzD\VanillaCookieConsent;
 
 use Closure;
 use JSzD\VanillaCookieConsent\Factories\CookiesManagerFactory;
-use JSzD\VanillaCookieConsent\Helpers\Proxy;
 
 /**
  * @method static bool shouldDisplayNotice()
@@ -23,9 +22,12 @@ use JSzD\VanillaCookieConsent\Helpers\Proxy;
  * @method static CookiesRegistrar category(string $key, ?Closure $maker = null)
  * @method static array getCategories()
  * @method static bool hasCategory(string $key)
- * @method static void boot(array $config = [], string $locale = 'en')
- * @method static void setTranslations(array $translations = [])
+ * @method static void boot(array $config = [], string $locale = 'en', array $translations = [])
  */
-class Cookies extends Proxy {
-    protected static $factory = CookiesManagerFactory::class;
+class Cookies {
+    public static function __callStatic($name, $arguments) {
+        $cookiesManager = CookiesManagerFactory::getInstance();
+
+        return $cookiesManager->$name(...$arguments);
+    }
 }

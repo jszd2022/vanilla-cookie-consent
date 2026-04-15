@@ -2,9 +2,9 @@
 
 namespace JSzD\VanillaCookieConsent;
 
-use JSzD\VanillaCookieConsent\Http\Cookie as CookieComponent;
-use JSzD\VanillaCookieConsent\Http\Request;
-use JSzD\VanillaCookieConsent\Http\Response;
+use JSzD\VanillaCookieConsent\Http\HttpCookie;
+use JSzD\VanillaCookieConsent\Http\HttpRequest;
+use JSzD\VanillaCookieConsent\Http\HttpResponse;
 
 
 class ConsentResponse {
@@ -53,7 +53,7 @@ class ConsentResponse {
     /**
      * Add a single cookie to the consent response.
      */
-    public function attachCookie(CookieComponent $cookie): static {
+    public function attachCookie(HttpCookie $cookie): static {
         $this->cookies[] = $cookie;
 
         return $this;
@@ -82,10 +82,10 @@ class ConsentResponse {
     /**
      * Transform the collected data into a JSON response-object.
      */
-    public function toResponse(Request $request): Response {
+    public function toResponse(HttpRequest $request): HttpResponse {
         $response = $request->expectsJson()
-            ? Response::make()->json($this->getResponseData())
-            : Response::redirectBack();
+            ? HttpResponse::make()->json($this->getResponseData())
+            : HttpResponse::redirectBack();
 
         foreach ($this->cookies as $cookie) {
             $response->withCookie($cookie);

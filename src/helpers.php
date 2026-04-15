@@ -1,5 +1,7 @@
 <?php
 
+use JSzD\VanillaCookieConsent\Factories\ConfigFactory;
+use JSzD\VanillaCookieConsent\Factories\TranslationFactory;
 use JSzD\VanillaCookieConsent\Helpers\Config;
 use JSzD\VanillaCookieConsent\Helpers\Translation;
 
@@ -43,20 +45,20 @@ if (!function_exists('lcc_minutesHumanReadable')) {
 
 if (!function_exists('lcc_config')) {
     function lcc_config(string $key, $default = null) {
-        return Config::get($key, $default);
+        return ConfigFactory::getInstance()->get($key, $default);
     }
 }
 
 if (!function_exists('lcc_route')) {
     function lcc_route(string $key) {
         $key = 'routes.' . $key;
-        return Config::get($key);
+        return ConfigFactory::getInstance()->get($key);
     }
 }
 
 if (!function_exists('lcc_trans')) {
     function lcc_trans(string $key, array $replace = [], string $locale = null): string|array {
-        return Translation::get($key, $replace, $locale);
+        return TranslationFactory::getInstance()->get($key, $replace, $locale);
     }
 }
 
@@ -66,7 +68,8 @@ if (!function_exists('lcc_render_view')) {
 
         ob_start();
 
-        include Config::resolveView($name);
+        $viewPath = ConfigFactory::getInstance()->resolveView($name);
+        include $viewPath;
 
         return ob_get_clean();
     }

@@ -2,7 +2,7 @@
 
 namespace JSzD\VanillaCookieConsent\Http;
 
-class Cookie {
+class HttpCookie {
     protected string $name;
     protected string $value;
     protected int    $minutes;

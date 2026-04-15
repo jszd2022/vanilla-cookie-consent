@@ -46,7 +46,7 @@ class TranslationService {
     }
 
     public function setTranslations(array $config): void {
-        $this->translations = array_merge($this->translations, $config);
+        $this->translations = array_replace_recursive($this->translations, $config);
     }
 
     public function getTranslations(): array {

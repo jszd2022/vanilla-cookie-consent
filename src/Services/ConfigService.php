@@ -44,7 +44,7 @@ class ConfigService {
     }
 
     public function setConfig(array $config): void {
-        $this->config = array_merge($this->config, $config);
+        $this->config = array_replace_recursive($this->config, $config);
     }
 
     public function getConfig(): array {
@@ -58,6 +58,7 @@ class ConfigService {
     public function resolveView(string $name): string {
         [$dir, $custom] = $this->resolveViewsDir();
         $name = $name . '.php';
+
         if ($custom) {
             if (file_exists($dir . '/' . $name)) {
                 return $dir . '/' . $name;

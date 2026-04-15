@@ -2,9 +2,9 @@
 
 namespace JSzD\VanillaCookieConsent\Http;
 
-use JSzD\VanillaCookieConsent\Http\Cookie as HttpCookie;
+use JSzD\VanillaCookieConsent\Http\HttpCookie;
 
-class Response {
+class HttpResponse {
     private mixed  $data         = null;
     private array  $cookies      = [];
     private array  $headers      = [];
@@ -20,7 +20,7 @@ class Response {
     }
 
     public function withoutCookie($cookie, $path = null, $domain = null): static {
-        $cookie = Cookie::make($cookie, null, -2628000, $path, $domain);
+        $cookie = HttpCookie::make($cookie, null, -2628000, $path, $domain);
         $this->setCookie($cookie);
         return $this;
     }
@@ -47,7 +47,7 @@ class Response {
         return $obj;
     }
 
-    public static function make(mixed $data = null): Response {
+    public static function make(mixed $data = null): HttpResponse {
         $obj = new self;
         $obj->data = $data;
         return $obj;
