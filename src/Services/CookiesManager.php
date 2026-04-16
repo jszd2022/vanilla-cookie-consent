@@ -6,11 +6,7 @@ use InvalidArgumentException;
 use JSzD\VanillaCookieConsent\ConsentResponse;
 use JSzD\VanillaCookieConsent\Cookie;
 use JSzD\VanillaCookieConsent\CookiesGroup;
-use JSzD\VanillaCookieConsent\Factories\ConfigFactory;
 use JSzD\VanillaCookieConsent\Factories\CookiesRegistrarFactory;
-use JSzD\VanillaCookieConsent\Factories\TranslationFactory;
-use JSzD\VanillaCookieConsent\Helpers\Config;
-use JSzD\VanillaCookieConsent\Helpers\Translation;
 use JSzD\VanillaCookieConsent\Http\HttpRequest;
 use JSzD\VanillaCookieConsent\Http\HttpCookie as HttpCookie;
 use function filemtime;
@@ -28,6 +24,7 @@ class CookiesManager {
      */
     public function __construct() {
         $request = new HttpRequest();
+        CookiesRegistrarFactory::getInstance()->essentials()->consent();
         $this->preferences = $this->getCurrentConsentSettings($request);
     }
 
@@ -210,11 +207,9 @@ class CookiesManager {
     }
 
     public function getNoticeMarkup(): string {
-        $policy = lcc_config('policy');
-
         return lcc_render_view('cookies', [
             'cookies' => CookiesRegistrarFactory::getInstance(),
-            'policy'  => $policy,
+            'policy'  => lcc_config('policy'),
         ]);
     }
 
@@ -256,7 +251,7 @@ class CookiesManager {
 
         return lcc_render_view('button', [
             'url'        => $url,
-            'label'      => $label ?? $action, // TODO: use lang file
+            'label'      => $label ?? $action,
             'attributes' => $attributes,
             'basename'   => $basename,
         ]);
@@ -286,9 +281,5 @@ class CookiesManager {
         );
 
         return $formattedString;
-    }
-
-    public function consentToEssentials(): void {
-        CookiesRegistrarFactory::getInstance()->essentials()->consent();
     }
 }
