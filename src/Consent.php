@@ -32,7 +32,7 @@ class Consent {
      * Add a cookie to the consent response.
      * @throws Exception
      */
-    public function cookie(string $value, ?string $path = null, ?string $domain = null, bool $secure = false, bool $httpOnly = false, bool $raw = true, ?string $sameSite = null): static {
+    public function cookie(string $value, ?string $path = null, ?string $domain = null, ?bool $secure = null, bool $httpOnly = false, bool $raw = true, ?string $sameSite = null): static {
         if (is_a($this->instance, CookiesGroup::class)) {
             throw new Exception('Cannot configure cookie from CookiesGroup.');
         }
