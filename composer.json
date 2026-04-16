@@ -1,0 +1,47 @@
+{
+  "name": "jszdavid/vanilla-cookie-consent",
+  "description": "Vanilla PHP Port of whitecube/laravel-cookie-consent",
+  "keywords": [
+    "cookie",
+    "consent",
+    "php"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/jszd2022/vanilla-cookie-consent.git",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Janás-Széll Dávid",
+      "email": "99481700+jszd2022@users.noreply.github.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "nesbot/carbon": "^3.11"
+  },
+  "require-dev": {
+    "pestphp/pest": "^2.0|^3.7",
+    "mockery/mockery": "^1.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "JSzD\\VanillaCookieConsent\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
