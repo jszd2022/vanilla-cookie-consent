@@ -1,73 +1,20 @@
 <?php
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Consent cookie configuration
-    |--------------------------------------------------------------------------
-    |
-    | In order to keep track of the user's preferences, this package stores
-    | an anonymized cookie. You do not need to register this cookie in the
-    | package's cookie manager as it is done automatically (under "essentials").
-    |
-    | The duration parameter represents the cookie's lifetime in minutes.
-    |
-    | The domain parameter, when defined, determines the cookie's activity domain.
-    | For multiple sub-domains, prefix your domain with "." (eg: ".mydomain.com").
-    |
-    */
-
-    'cookie' => [
+    'cookie'  => [
         'name'     => 'cookie_consent',
         'duration' => (60 * 24 * 365),
         'domain'   => null,
-        'secure'   => false, // Set this to true if your site is served over HTTPS
+        'secure'   => false,
     ],
-
     'session' => [
-        'cookie' => 'PHPSESSID', // default php session cookie name
-        'lifetime' => 24, // default php session lifetime is 24 minutes
+        'cookie'   => 'PHPSESSID',
+        'lifetime' => 24,
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Legal page configuration
-    |--------------------------------------------------------------------------
-    |
-    | Most cookie notices display a link to a dedicated page explaining
-    | the extended cookies usage policy. If your application has such a page
-    | you can add its route name here.
-    |
-    */
-
-    'policy'           => null,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Google Analytics configuration
-    |--------------------------------------------------------------------------
-    |
-    | If you use Google Analytics, you can configure the package to automatically
-    | load the Google Analytics script when the user gives his consent.
-    |
-    | The ID parameter is required and represents your Google Analytics ID.
-    |
-    | The anonymize parameter is optional and determines whether the user's IP
-    | address should be anonymized before being sent to Google Analytics.
-    |
-    */
-    'google_analytics' => [
-        'id'           => '',
-        'anonymize_ip' => '',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Routes configuration
-    |--------------------------------------------------------------------------
-    | Used by the JavaScript functions
-    |
-    */
-    'routes' => [
+    'policy'    => null,
+    'views_dir' => null,
+    'lang_dir'  => null,
+    'routes'    => [
         'script'               => '/cookie-consent/script',
         'accept-all'           => '/cookie-consent/accept-all',
         'accept-essentials'    => '/cookie-consent/accept-essentials',
