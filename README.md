@@ -19,7 +19,7 @@ This package provides all the tools you'll need to cover a proper EU-compliant c
 
 We've built this package with flexibility in our mind: you'll be able to customize content, behavior and styling as you wish. Here is what it looks like out of the box:
 
-![Laravel Cookie Consent in action](laravel-cookie-consent.gif)
+![Cookie Consent in action](laravel-cookie-consent.gif)
 
 ## Table of contents
 
@@ -177,7 +177,7 @@ Instead of consenting each cookie individually, users grant consent to those cat
 There are 3 base categories included in this package:
 
 1. `Cookies::essentials()`: lists all cookies that add required functionality to the app. This category cannot be opted-out and automatically contains the package's consent cookie.
-    - `Cookies::essentials()->session()`: registers Laravel's "session" cookie (defined in your app's `session.cookie` configuration) ;
+    - `Cookies::essentials()->session()`: registers PHP's "session" cookie (defined in the config's `session.cookie` configuration) ;
 2. `Cookies::analytics()`: lists all cookies used for statistics and data collection.
     - `Cookies::analytics()->google(string $trackingId, bool $anonymizeIp)`: automatically lists all Google Analytics' cookies. **This will also automatically register Google Analytics' JS scripts and inject them to the layout's `<head>` only when consent is granted.** Convenient, huh?
 3. `Cookies::optional()`: lists all cookies that serve some kind of utility feature. Since this category can ben opted-out, linked features should always check if consent has been granted before queuing or relying on their cookies.
@@ -282,8 +282,6 @@ $cookie->accepted(function(Consent $consent) {
     $consent->cookie(value: 'off')->script('<script src="' . asset('js/darkmode.js') . '"></script>');
 });
 ```
-
-Other parameters can be type-hinted and will be resolved by Laravel's Service Container:
 
 ```php
 use App\Services\MyDependencyService;
@@ -401,10 +399,10 @@ Keep in mind that cookie notices are supposed to work when Javascript is disable
 Since most implementations have the same needs, we've separated our Javascript code into two parts:
 
 1. A reusable Javascript library: automatically loaded via the `Cookies::renderScripts()` method, it is used to perform AJAX requests (using Axios) for all the existing API routes:
-    - `LaravelCookieConsent.acceptAll()`
-    - `LaravelCookieConsent.acceptEssentials()`
-    - `LaravelCookieConsent.configure(data)`
-    - `LaravelCookieConsent.reset()`
+    - `VanillaCookieConsent.acceptAll()`
+    - `VanillaCookieConsent.acceptEssentials()`
+    - `VanillaCookieConsent.configure(data)`
+    - `VanillaCookieConsent.reset()`
 2. A script implementing said library for our base design. Like our basic styling tag, this script is directly included in the `cookies.php` view using a `<script>` tag. Feel free to remove it and add your own interactivity logic.
 
 ### Textual content and translations
@@ -436,7 +434,7 @@ When using a custom directory, the package will look for the translations in the
 
 ### Cookie Policy Details Page
 
-Your website will need a dedicated "Cookie Policy" page containing extensive information about cookies, how and why they're used, etc. These pages also explain in detail which cookies are included. In order to keep these pages automatically up-to-date, keep in mind that this package can be used anywhere in your application using the `Whitecube\LaravelCookieConsent\Facades\Cookies` facade:
+Your website will need a dedicated "Cookie Policy" page containing extensive information about cookies, how and why they're used, etc. These pages also explain in detail which cookies are included. In order to keep these pages automatically up-to-date, keep in mind that this package can be used anywhere in your application using the `JSzD\VanillaCookieConsent\Cookies` class:
 
 ```php
 <?php ?>
